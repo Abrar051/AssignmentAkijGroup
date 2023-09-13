@@ -1,0 +1,81 @@
+﻿@*@page
+@model RegisterModel*@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Add id attributes to your form elements -->
+        <h1 class="mb-4">Registration Form</h1>
+        <div class="form-group">
+            <label for="FullName">Full Name:</label>
+            <input type="text" class="form-control" id="FullName" name="FullName" required pattern="[A-Za-z ]+" />
+        </div>
+        <div class="form-group">
+            <label for="Email">Email:</label>
+            <input type="email" class="form-control" id="Email" name="Email" required />
+        </div>
+        <div class="form-group">
+            <label for="Address">Address:</label>
+            <textarea class="form-control" id="Address" name="Address" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="Username">Username:</label>
+            <input type="text" class="form-control" id="Username" name="Username" required pattern="[A-Za-z ]+"/>
+        </div>
+        <div class="form-group">
+            <label for="Password">Password:</label>
+            <input type="password" class="form-control" id="Password" name="Password" required />
+        </div>
+        <button type="submit" class="btn btn-primary" id="registerButton">Register</button>
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get references to form elements by their IDs
+        const fullNameInput = document.getElementById('FullName');
+        const emailInput = document.getElementById('Email');
+        const addressInput = document.getElementById('Address');
+        const usernameInput = document.getElementById('Username');
+        const passwordInput = document.getElementById('Password');
+        const registerButton = document.getElementById('registerButton');
+
+        // Add an event listener to the register button
+        registerButton.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const userData = {
+                Name: fullNameInput.value,
+                Email: emailInput.value,
+                Address: addressInput.value,
+                User: usernameInput.value,
+                Password: passwordInput.value,
+            };
+
+            fetch('/Home/Register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            })
+                .then((response) => response.text()) // Convert response to text
+                .then((data) => {
+                    // Display the response text in an alert
+                    alert(data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        });
+    });
+
+</script>
