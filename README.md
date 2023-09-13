@@ -5,4 +5,4 @@ Assignment AkijBashirGroup (User Registration)
 
 Load the package from github 
 
-Database and Table schema are also included 
+Database and Table schema are also included inside AssignmentAkijGroupFolder
